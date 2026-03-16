@@ -14,6 +14,11 @@ import SupplierDashboard from './pages/SupplierDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import InstallationBooking from './pages/InstallationBooking';
 import Auth from './pages/Auth';
+import SmartSearch from './pages/SmartSearch';
+import Produtos from './pages/Produtos';
+import Clientes from './pages/Clientes';
+import Pedidos from './pages/Pedidos';
+import Estoque from './pages/Estoque';
 
 function Navbar() {
   const { t, i18n } = useTranslation();
@@ -34,12 +39,26 @@ function Navbar() {
           <Link to="/search" className="flex items-center gap-1 hover:text-emerald-400 transition-colors">
             <Search className="h-4 w-4" /> {t('nav.search')}
           </Link>
+          <Link to="/smart-search" className="flex items-center gap-1 hover:text-emerald-400 transition-colors">
+            <Search className="h-4 w-4" /> Busca IA
+          </Link>
           <Link to="/cart" className="flex items-center gap-1 hover:text-emerald-400 transition-colors">
             <ShoppingCart className="h-4 w-4" /> {t('nav.cart')}
           </Link>
           <Link to="/orders" className="flex items-center gap-1 hover:text-emerald-400 transition-colors">
             <Package className="h-4 w-4" /> {t('nav.orders')}
           </Link>
+          <div className="relative group">
+            <button className="flex items-center gap-1 hover:text-emerald-400 transition-colors">
+              <Settings className="h-4 w-4" /> Gestão
+            </button>
+            <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible">
+              <Link to="/produtos" className="block px-4 py-2 text-sm text-white hover:bg-slate-700">Produtos</Link>
+              <Link to="/clientes" className="block px-4 py-2 text-sm text-white hover:bg-slate-700">Clientes</Link>
+              <Link to="/pedidos" className="block px-4 py-2 text-sm text-white hover:bg-slate-700">Pedidos</Link>
+              <Link to="/estoque" className="block px-4 py-2 text-sm text-white hover:bg-slate-700">Estoque</Link>
+            </div>
+          </div>
           <Link to="/supplier-dashboard" className="flex items-center gap-1 hover:text-emerald-400 transition-colors">
             <Settings className="h-4 w-4" /> {t('nav.supplier')}
           </Link>
@@ -70,17 +89,27 @@ export default function App() {
         <Navbar />
         <main className="flex-1 max-w-7xl mx-auto w-full p-6">
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/smart-search" element={<SmartSearch />} />
             <Route path="/supplier/:id" element={<SupplierPage />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/supplier-dashboard" element={<SupplierDashboard />} />
-            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/book-installation/:productId" element={<InstallationBooking />} />
             <Route path="/auth" element={<Auth />} />
+
+            {/* Management Routes */}
+            <Route path="/produtos" element={<Produtos />} />
+            <Route path="/clientes" element={<Clientes />} />
+            <Route path="/pedidos" element={<Pedidos />} />
+            <Route path="/estoque" element={<Estoque />} />
+
+            {/* Admin/Supplier Routes */}
+            <Route path="/supplier-dashboard" element={<SupplierDashboard />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
         <footer className="bg-slate-900 text-slate-400 py-8 text-center">
